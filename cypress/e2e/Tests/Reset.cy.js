@@ -1,5 +1,4 @@
 import HomePage from "../Pages/HomePage";
-import LoginPage from "../Pages/LoginPage";
 
 describe('Near Me Application', () => {
     const homePage = new HomePage();
