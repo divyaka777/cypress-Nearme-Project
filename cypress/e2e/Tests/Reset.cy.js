@@ -16,7 +16,6 @@ describe('Near Me Application', () => {
     it('Should attempt login with valid credentials', () => {
             homePage.clickLoginLink();
             cy.get('input[id="email"]').clear().type('divyaka77@gmail.com');
-            cy.get('input[id="password"]').clear().type('Newyear@2020');
             homePage.submit();
         
         });
