@@ -10,7 +10,6 @@ class ResetPage {
         return cy.contains('Password reset email sent');  
     }
     navigateToResetPage() {
-        cy.visit('/login'); 
         cy.get('a[href="/reset"]').click();  
     }
     enterEmail(email) {
