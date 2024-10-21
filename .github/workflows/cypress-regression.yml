@@ -1,0 +1,47 @@
+name: Cypress Regression Tests
+
+# This workflow will run every time code is pushed to the repo or a pull request is opened.
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the latest code
+      - name: Checkout the code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js to run the Cypress tests
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # Step 3: Install the dependencies
+      - name: Install dependencies
+        run: npm ci # Use 'npm ci' for faster builds (especially for CI)
+
+      # Step 4: Install Cypress
+      - name: Install Cypress
+        run: npm install cypress --save-dev
+
+      # Step 5: Run Cypress tests in headless mode
+      - name: Run Cypress tests
+        run: npx cypress run
+
+      # Step 6: Archive Cypress test results (optional but useful for debugging)
+      - name: Upload Cypress videos and screenshots
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-artifacts
+          path: |
+            cypress/screenshots
+            cypress/videos
